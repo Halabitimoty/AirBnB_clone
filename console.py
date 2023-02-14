@@ -213,7 +213,7 @@ class HBNBCommand(cmd.Cmd):
                 elif not attr_val:
                     print("** value missing **")
                 else:
-                    #attr_val = self.parse(attr_val)
+                    attr_val = self.parse(attr_val)
                     setattr(obj, attr_name, attr_val)
                     obj.save()
 
