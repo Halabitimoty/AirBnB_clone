@@ -52,6 +52,11 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing upon receiving an empty line."""
         return False
 
+    def help_help(self, line):
+        print("\n".join(["Provides help on how to use the",
+                         "available commands"
+                         ]))
+
     def default(self, arg):
         """Default behavior for cmd module when input is invalid"""
         argdict = {
