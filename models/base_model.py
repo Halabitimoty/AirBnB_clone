@@ -1,53 +1,43 @@
 #!/usr/bin/python3
 """
-Parent class that will inherit
+defines a class that defines all common attr/methods for other classes
 """
-import models
-from uuid import uuid4
+import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel:
-    """
-    Defines all common attributes/methods
-    """
+    """defines all the cmon attr/methods for other classes"""
 
     def __init__(self, *args, **kwargs):
-        """Initialize a new BaseModel.
-        Args:
-            *args (any): Unused.
-            **kwargs (dict): Key/value pairs of attributes.
-        """
-        tform = "%Y-%m-%dT%H:%M:%S.%f"
-        self.id = str(uuid4())
-        self.created_at = datetime.today()
-        self.updated_at = datetime.today()
-        if len(kwargs) != 0:
+        if kwargs:
+            objs = ['created_at', 'updated_at']
             for k, v in kwargs.items():
-                if k == "created_at" or k == "updated_at":
-                    self.__dict__[k] = datetime.strptime(v, tform)
-                else:
-                    self.__dict__[k] = v
+                if k in objs:
+                    setattr(self, k, datetime.fromisoformat(v))
+                elif k != '__class__':
+                    setattr(self, k, v)
         else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
             models.storage.new(self)
 
     def __str__(self):
-        """Return the print/str representation of the BaseModel instance."""
-        clname = self.__class__.__name__
-        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
+        s = f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
+        return s
 
     def save(self):
-        """Update updated_at with the current datetime."""
-        self.updated_at = datetime.today()
+        """updates the 'updated_at' attr of the obj"""
+        self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """Return the dictionary of the BaseModel instance.
-        Includes the key/value pair __class__ representing
-        the class name of the object.
-        """
-        new_dict = self.__dict__.copy()
-        new_dict["created_at"] = self.created_at.isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
-        new_dict["__class__"] = self.__class__.__name__
-        return new_dict
+        """returns the dixt representation of the obj"""
+        dict_rep = self.__dict__.copy()
+        dict_rep['__class__'] = type(self).__name__
+        dict_rep['created_at'] = self.created_at.isoformat()
+        dict_rep['updated_at'] = self.updated_at.isoformat()
+
+        return dict_rep

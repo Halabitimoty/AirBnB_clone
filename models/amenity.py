@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-"""
-Defines amenities
-"""
+"""defines a class that inherits BaseModel"""
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    """Defines amenities that user can choose from to offer at its place"""
+    """inherits BaseModel"""
+
     name = ""

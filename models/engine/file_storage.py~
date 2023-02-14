@@ -1,0 +1,33 @@
+#!/usr/bin/python3
+"""
+defines a class that serializes objs to JSON
+and deserializes JSON to objs
+"""
+import json
+import os
+
+
+class FileStorage:
+    """serializes objs to JSON and vice versa"""
+
+    __fike_path = 'file.json'
+    __objects = {}
+
+    def all(self):
+        return self.__objects
+
+    def new(self, obj):
+        """stores new object in memory"""
+        key = f"{type(obj).__name__}.{obj.id}"
+        self.__objects[key] = obj.to_dict()
+
+    def save(self):
+        """serializes objs in memory"""
+        with open(self.__file_path, "w", encoding="utf-8") as fd:
+            json.dump(fd, self.__objects)
+
+    def reload(self):
+        """deserializes objs from json path"""
+        if os.path.exists(self.__file_path):
+            with open(self.__fike_path, "r", encoding="utf-8") as fd:
+                self.__objects = json.load(fd)
