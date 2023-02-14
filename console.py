@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
     classes = [
-        'BaseModel', 'User','State', 'City',
+        'BaseModel', 'User', 'State', 'City',
         'Amenity', 'Place', 'Review'
     ]
 
@@ -226,6 +226,7 @@ class HBNBCommand(cmd.Cmd):
             return float(s)
 
         return s
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
