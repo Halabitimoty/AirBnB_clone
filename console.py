@@ -186,7 +186,7 @@ class HBNBCommand(cmd.Cmd):
 
             print(count)
 
-    def do_update(self, _):
+    def do_update(self, line):
         """
         Updates an instance based on the class name and id
         by adding or updating attribute
@@ -206,16 +206,28 @@ class HBNBCommand(cmd.Cmd):
                         setattr(obj, k, v)
                         obj.save()
             else:
-                attr_name = self.__cmd_args.get('3', '')
-                attr_val = self.__cmd_args.get('4', '')
-                if not attr_name:
-                    print("** attribute name missing **")
-                elif not attr_val:
-                    print("** value missing **")
-                else:
-                    attr_val = self.parse(attr_val)
-                    setattr(obj, attr_name, attr_val)
-                    obj.save()
+                 args = shlex.split(line)
+                 args_size = len(args)
+                 if args_size == 0:
+                     print('** class name missing **')
+                 elif args[0] not in self.classes:
+                     print("** class doesn't exist **")
+                 elif args_size == 1:
+                     print('** instance id missing **')
+                 else:
+                     key = args[0] + '.' + args[1]
+                     inst_data = models.storage.all().get(key)
+                     if inst_data is None:
+                         print('** no instance found **')
+                     elif args_size == 2:
+                         print('** attribute name missing **')
+                     elif args_size == 3:
+                         print('** value missing **')
+                     else:
+                         args[3] = self.parse(args[3])
+                         setattr(inst_data, args[2], args[3])
+                         setattr(inst_data, 'updated_at', datetime.now())
+                         models.storage.save()
 
     @staticmethod
     def parse(s):
