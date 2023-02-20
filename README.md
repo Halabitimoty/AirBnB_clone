@@ -1,102 +1,73 @@
-# AirBnB Clone - The console
+AirBnB Clone - The Console
 
-the console for airbnb project. Create a command interpreter that can modify or delete the database
-The users like the administrator of the app Airbnb clone has the posibility of the manipulate objects and data of the application, this objects are:
+HolBnB clone Welcome to the AirBnB clone project!
+Getting Started
 
-- Users
-- Places
-- States
-- Cities
-- Amenities
-- Reviews
+What’s a command interpreter?
 
-![alt text](https://i.ibb.co/RSzZ5yh/815046647d23428a14ca.png)
+Do you remember the Shell? It’s exactly the same but limited to a specific use-case. In our case, we want to
 
-## Requirements
+be able to manage the objects of our project:
 
-## Python Scripts
+    Create a new object (ex: a new User or a new Place)
 
-    Allowed editors: vi, vim, emacs
-    All your files will be interpreted/compiled on Ubuntu 14.04 LTS using python3 (version 3.4.3)
-    All your files should end with a new line
-    The first line of all your files should be exactly #!/usr/bin/python3
-    A README.md file, at the root of the folder of the project, is mandatory
-    Your code should use the PEP 8 style (version 1.7 or more)
-    All your files must be executable
-    The length of your files will be tested using wc
-    All your modules should have a documentation (python3 -c 'print(__import__("my_module").__doc__)')
-    All your classes should have a documentation (python3 -c 'print(__import__("my_module").MyClass.__doc__)')
-    All your functions (inside and outside a class) should have a documentation (python3 -c 'print(__import__("my_module").my_function.__doc__)' and python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)')
+    Retrieve an object from a file, a database etc…
 
-## Python Unit Tests
+    Do operations on objects (count, compute stats, etc…)
 
-    Allowed editors: vi, vim, emacs
-    All your files should end with a new line
-    All your test files should be inside a folder tests
-    You have to use the unittest module
-    All your test files should be python files (extension: .py)
-    All your test files and folders should start by test_
-    Your file organization in the tests folder should be the same as your project
-    e.g., For models/base_model.py, unit tests must be in: tests/test_models/test_base_model.py
-    e.g., For models/user.py, unit tests must be in: tests/test_models/test_user.py
-    All your tests should be executed by using this command: python3 -m unittest discover tests
-    You can also test file by file by using this command: python3 -m unittest tests/test_models/test_base_model.py
-    All your modules should have a documentation (python3 -c 'print(__import__("my_module").__doc__)')
-    All your classes should have a documentation (python3 -c 'print(__import__("my_module").MyClass.__doc__)')
-    All your functions (inside and outside a class) should have a documentation (python3 -c 'print(__import__("my_module").my_function.__doc__)' and python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)')
-    We strongly encourage you to work together on test cases, so that you don’t miss any edge
+    Update attributes of an object
 
-## Installation
+    Destroy an object
 
-For use this console you need to have:
+Learning Objectives
+General
 
-- Linux ubuntu 14.04.3 LTS or higger
-- Python 3.7 or higger
+    How to create a Python package
 
-## Files
+    How to create a command interpreter in Python using the cmd module
 
-- HBNHCommand: console.py
-- Amenity: models/amenity.py
-- BaseModel: models/base_model.py
-- City: models/city.py
-- models.init : models/**init**.py
-- Place: models/place.py
-- Review: models/review.py
-- State: models/state.py
-- User: models/user.py
-- FileStorage: models/engine/file_storage.py
-- engine.init: models/engine/**init**.py
+    What is Unit testing and how to implement it in a large project
 
-```
-How To run the command interpreter:
-```
+    How to serialize and deserialize a Class
 
-$ ./console.py
+    How to write and read a JSON file
 
-## Examples
+    How to manage datetime
 
-Interactive mode:
+    What is an UUID
 
-```
+    What is *args and how to use it
+
+    What is **kwargs and how to use it
+
+    How to handle named arguments in a function
+
+Execution
+
+Your shell should work like this in interactive mode:
+
 $ ./console.py
 (hbnb) help
+
 Documented commands (type help <topic>):
 ========================================
-EOF  help  quit
+EOF help quit
+
 (hbnb)
 (hbnb)
 (hbnb) quit
 $
-```
 
-Non-interactive mode:
+But also in non-interactive mode: (like the Shell project in C)
 
-```
 $ echo "help" | ./console.py
+
 (hbnb)
+
 Documented commands (type help <topic>):
 ========================================
-EOF  help  quit
+
+EOF help quit
 (hbnb)
 $
 $ cat test_help
@@ -104,14 +75,55 @@ help
 $
 $ cat test_help | ./console.py
 (hbnb)
+
+
 Documented commands (type help <topic>):
 ========================================
-EOF  help  quit
+EOF help quit
 (hbnb)
 $
-```
 
-## Authors
+Usage Examples
 
-- **Alabi Timothy** <[Halabitimoty](https://github.com/Halabitimoty)>
-- **Olaitan Daniel** <[daniell-olaitan](https://github.com/daniell-olaitan)>
+Launching the console
+
+$ ./console.py
+(hbnb)
+
+Creating a new object
+
+(hbnb) create
+** class name missing **
+(hbnb) create User
+670265eb-5982-489e-8b92-2dff054f0776
+
+Show an object
+
+(hbnb) show User
+** instance id missing **
+(hbnb) show User 670265eb-5982-489e-8b92-2dff054f0776
+[User] (670265eb-5982-489e-8b92-2dff054f0776) {'created_at': datetime.datetime(2020, 2, 19, 18, 8, 58, 458246), 'id': '670265eb-5982-489e-8b92-2dff054f0776', 'updated_at': datetime.datetime(2020, 2, 19, 18, 8, 58, 458261)}
+
+Update an object
+
+(hbnb) all
+["[User] (70f71c16-962b-48ad-9df8-9203fe23d612) {'created_at': datetime.datetime(2020, 2, 19, 18, 11, 32, 341144), 'id': '70f71c16-962b-48ad-9df8-9203fe23d612', 'updated_at': datetime.datetime(2020, 2, 19, 18, 11, 32, 341161)}"]
+(hbnb) update
+** class name missing **
+(hbnb) update User
+** instance id missing **
+(hbnb) update User 70f71c16-962b-48ad-9df8-9203fe23d612
+** attribute name missing **
+(hbnb) update User 70f71c16-962b-48ad-9df8-9203fe23d612  Age "20"
+(hbnb) all
+["[User] (70f71c16-962b-48ad-9df8-9203fe23d612) {'Age': 20, 'created_at': datetime.datetime(2020, 2, 19, 18, 11, 32, 341144), 'id': '70f71c16-962b-48ad-9df8-9203fe23d612', 'updated_at': datetime.datetime(2020, 2, 19, 18, 13, 9, 937933)}"]
+(hbnb)
+
+Destroy an object
+
+(hbnb) destroy
+** class name missing **
+(hbnb) destroy User
+** instance id missing **
+(hbnb) destroy User 670265eb-5982-489e-8b92-2dff054f0776
+(hbnb)

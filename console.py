@@ -50,7 +50,12 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
-        pass
+        return False
+
+    def help_help(self, line):
+        print("\n".join(["Provides help on how to use the",
+                         "available commands"
+                         ]))
 
     def default(self, arg):
         """Default behavior for cmd module when input is invalid"""
@@ -79,7 +84,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, arg):
         """EOF signal to exit the program."""
-        print("")
         return True
 
     def do_create(self, arg):
